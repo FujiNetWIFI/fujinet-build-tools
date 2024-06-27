@@ -37,7 +37,11 @@ SHELL := /usr/bin/env bash
 ALL_TASKS =
 DISK_TASKS =
 
--include ../makefiles/os.mk
+# Those files are in there somewhere, let me take another look..
+-include ../../../fujinet-build-tools/makefiles/os.mk
+-include ../../fujinet-build-tools/makefiles/os.mk
+-include ../fujinet-build-tools/makefiles/os.mk
+
 
 CC := cl65
 
@@ -88,8 +92,15 @@ ASFLAGS += --asm-include-dir $(SRCDIR)
 CFLAGS += --include-dir $(SRCDIR)
 
 # allow for additional flags etc
--include ../makefiles/common.mk
--include ../makefiles/custom-$(CURRENT_PLATFORM).mk
+
+-include ../../../fujinet-build-tools/makefiles/common.mk
+-include ../../fujinet-build-tools/makefiles/common.mk
+-include ../fujinet-build-tools/makefiles/common.mk
+
+-include ../../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
+-include ../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
+-include ../fujinet-build-tools/makefiles/ocustom-$(CURRENT_PLATFORM).mk
+
 
 # allow for application specific config
 -include ./application.mk

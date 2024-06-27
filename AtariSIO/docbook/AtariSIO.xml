@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book>
+  <bookinfo>
+    <title>AtariSIO</title>
+
+    <author>
+      <firstname>Matthias</firstname>
+
+      <surname>Reichl</surname>
+
+      <affiliation>
+        <address><email>hias@horus.com</email></address>
+      </affiliation>
+    </author>
+
+    <copyright>
+      <year>2002-2008</year>
+
+      <holder>Matthias Reichl</holder>
+    </copyright>
+  </bookinfo>
+
+  <xi:include href="intro.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+
+  <reference id="manpages">
+    <referenceinfo>
+      <title>HiassofT's Atari 8-bit Tools</title>
+
+      <date>28 February 2008</date>
+
+      <productname>AtariSIO 0.30-pre3</productname>
+    </referenceinfo>
+
+    <title>AtariSIO man pages</title>
+
+  <xi:include href="atariserver.1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="atarixfer.1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="adir.1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+  <xi:include href="dir2atr.1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+  </reference>
+</book>

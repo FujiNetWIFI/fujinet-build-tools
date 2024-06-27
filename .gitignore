@@ -1,0 +1,83 @@
+# Prerequisites
+*.d
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# lib exceptions
+!fujinet-network-*.lib
+!fujinet-*.lib
+fujinet-lib/
+**/_libs/
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+.vscode/
+
+# apple tools for generating po files etc
+apple-tools/*.jar
+apple-tools/*.dsk
+
+# build artifacts
+build/
+dist/
+obj/
+
+# emulator configs
+altirra-debug.ini
+atari800-debug.cfg
+AppleWin.log
+
+Makefile.options
+.DS_Store
+
+# for fujinet-weather
+adam/weather_BOOTSTRAP.bin
+adam/weather.ddp
+test/adam/.clang-format
+vic20-rom/weather*

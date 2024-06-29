@@ -1,12 +1,17 @@
+
+
+
 # COMPILE FLAGS
 
 # reserved memory for graphics
 # LDFLAGS += -Wl -D,__RESERVED_MEMORY__=0x2000
-
 #LDFLAGS += --start-addr 0x4400
 #LDFLAGS += -C cfg/atari.cfg
 
-################################################################
+
+# acd use $(PROGRAM_TGT) not just $(PROGRAM) when making the .po
+
+#################################################################
 # DISK creation
 
 SUFFIX =
@@ -16,10 +21,13 @@ AUTOBOOT := -l
 APPLE_TOOLS_DIR := ../../fujinet-build-tools/apple-tools
 
 .po:
-	$(call RMFILES,$(DIST_DIR)/$(APP_NAME)*.po)
+	$(call RMFILES,$(DIST_DIR)/$(PROGRAM_TGT).po)
 	cp $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(DIST_DIR)/$(PROGRAM)$(SUFFIX)
-	$(APPLE_TOOLS_DIR)/mk-bitsy.sh $(DIST_DIR)/$(PROGRAM).po $(PROGRAM)$(SUFFIX)
-	$(APPLE_TOOLS_DIR)/add-file.sh $(AUTOBOOT) $(DIST_DIR)/$(PROGRAM).po $(DIST_DIR)/$(PROGRAM)$(SUFFIX) $(PROGRAM)
+	$(APPLE_TOOLS_DIR)/mk-bitsy.sh $(DIST_DIR)/$(PROGRAM_TGT).po $(PROGRAM_TGT)$(SUFFIX)
+	$(APPLE_TOOLS_DIR)/add-file.sh $(AUTOBOOT) $(DIST_DIR)/$(PROGRAM_TGT).po $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(PROGRAM_TGT)
+#	$(APPLE_TOOLS_DIR)/mk-bitsy.sh $(DIST_DIR)/$(PROGRAM_TGT).po $(PROGRAM_TGT)$(SUFFIX)
+#	$(APPLE_TOOLS_DIR)/add-file.sh $(AUTOBOOT) $(DIST_DIR)/$(PROGRAM_TGT).po $(BUILD_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(PROGRAM_TGT)
+
 
 # Applewin debug script
 .gendebug: $(PROGRAM_TGT)

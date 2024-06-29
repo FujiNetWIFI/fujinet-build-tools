@@ -99,11 +99,15 @@ CFLAGS += --include-dir $(SRCDIR)
 
 -include ../../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
 -include ../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
--include ../fujinet-build-tools/makefiles/ocustom-$(CURRENT_PLATFORM).mk
+-include ../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
 
 
 # allow for application specific config
 -include ./application.mk
+
+# allow for local env specific deployment options
+-include ./deployment.mk
+
 
 define _listing_
   CFLAGS += --listing $$(@:.o=.lst)

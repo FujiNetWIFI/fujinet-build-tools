@@ -32,6 +32,9 @@
 #     VERSION_STRING := $(file < $(VERSION_FILE))
 #     CFLAGS += -DVERSION_STRING=\"$(VERSION_STRING)\"
 
+$(info >>>Including build.mk)
+
+
 # Ensure WSL2 Ubuntu and other linuxes use bash by default instead of /bin/sh, which does not always like the shell commands.
 SHELL := /usr/bin/env bash
 ALL_TASKS =
@@ -91,7 +94,15 @@ CFLAGS += --include-dir src/common --include-dir src/$(CURRENT_TARGET)
 ASFLAGS += --asm-include-dir $(SRCDIR)
 CFLAGS += --include-dir $(SRCDIR)
 
-# allow for additional flags etc
+
+#
+# load the sub-makefiles
+#
+
+# Include the find-tools.mk file which locates fujinet-build-tools
+-include ../../../fujinet-build-tools/makefiles/find-tools.mk
+-include ../../fujinet-build-tools/makefiles/find-tools.mk
+-include ../fujinet-build-tools/makefiles/find-tools.mk
 
 -include ../../../fujinet-build-tools/makefiles/common.mk
 -include ../../fujinet-build-tools/makefiles/common.mk

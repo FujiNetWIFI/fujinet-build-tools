@@ -1,3 +1,6 @@
+$(info >>>>Including fujinet-lib.mk)
+
+
 FUJINET_LIB_VERSION := 4.2.0
 
 FUJINET_LIB = ../_libs

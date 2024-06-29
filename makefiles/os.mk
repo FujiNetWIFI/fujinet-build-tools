@@ -1,6 +1,8 @@
 ###################################################################
 # Platform Mapping, OS specifics, and Emulator settings
 ###################################################################
+$(info >>>>Including os.mk)
+
 
 ifeq ($(CURRENT_TARGET),)
 $(error Missing value for CURRENT_TARGET)

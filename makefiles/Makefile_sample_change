@@ -3,34 +3,20 @@
 # Copy this Makefile to your local project and edit as needed. It works with cc65 and this repo to create clean
 # easy builds that will pull down fujinet-lib for you automatically...
 #
-#
-#
-#
 # Set the TARGETS and PROGRAM values as required.
 # See makefiles/build.mk for details on directory structure for src files and how to add custom extensions to the build.
 #
 
-$(info -)
-$(info Starting Build)
-
 TARGETS = apple2enh apple2
 PROGRAM := weather
 
-# We need to set this here to point to the relative path to the fujinet-build-tools repo
-# Remember, this Makefile should be in some other fujinet project and used to built that code
-#
 # EDIT THIS 
 export FUJINET_BUILD_TOOLS_DIR := ../../fujinet-build-tools
-#
-#
 
-# Ensure if FUJINET_BUILD_TOOLS_DIR is set to a real directory
+
 ifeq ($(wildcard $(FUJINET_BUILD_TOOLS_DIR)),)
 $(error You must have FUJINET_BUILD_TOOLS_DIR set to the location of fujinet-build-tools repo)
 endif
-
-$(info >>>> Using FUJINET_BUILD_TOOLS_DIR=$(FUJINET_BUILD_TOOLS_DIR))
-
 
 SUB_TASKS := clean disk test release
 .PHONY: all help $(SUB_TASKS)

@@ -1,5 +1,5 @@
 # fujinet-build-tools
-A repo of help scripts, jar files, makefile help scripts for building apps.
+A repo of help scripts, jar files, makefile help scripts for building apps in 2024.
 
 
 # AtariSIO
@@ -13,5 +13,8 @@ A repo of help scripts, jar files, makefile help scripts for building apps.
 
  # Makefiles
  - @fenrocks makefile scripts for building cc65 targets
+ - copy the sample Makefile to your own local FujiNet project, replace the standard cc65 Makefile
+ - edit the path back to this repo
+ - enjoy the features of the FUFMF - Fenrocks Ultimate Fuji Make Files
 
 

@@ -32,7 +32,7 @@
 #     VERSION_STRING := $(file < $(VERSION_FILE))
 #     CFLAGS += -DVERSION_STRING=\"$(VERSION_STRING)\"
 
-$(info >>>Including build.mk)
+$(info >>>Starting build.mk)
 
 
 # Ensure WSL2 Ubuntu and other linuxes use bash by default instead of /bin/sh, which does not always like the shell commands.
@@ -40,10 +40,8 @@ SHELL := /usr/bin/env bash
 ALL_TASKS =
 DISK_TASKS =
 
-# Those files are in there somewhere, let me take another look..
--include ../../../fujinet-build-tools/makefiles/os.mk
--include ../../fujinet-build-tools/makefiles/os.mk
--include ../fujinet-build-tools/makefiles/os.mk
+
+-include $(FUJINET-BUILD-TOOLS_DIR)/makefiles/os.mk
 
 
 CC := cl65
@@ -99,18 +97,17 @@ CFLAGS += --include-dir $(SRCDIR)
 # load the sub-makefiles
 #
 
-# Include the find-tools.mk file which locates fujinet-build-tools
--include ../../../fujinet-build-tools/makefiles/find-tools.mk
--include ../../fujinet-build-tools/makefiles/find-tools.mk
--include ../fujinet-build-tools/makefiles/find-tools.mk
+-include $(FUJINET-BUILD-TOOLS_DIR)/makefiles/common.mk
 
--include ../../../fujinet-build-tools/makefiles/common.mk
--include ../../fujinet-build-tools/makefiles/common.mk
--include ../fujinet-build-tools/makefiles/common.mk
+-include $(FUJINET-BUILD-TOOLS_DIR)/makefiles/custom-$(CURRENT_PLATFORM).mk
 
--include ../../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
--include ../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
--include ../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
+#-include ../../../fujinet-build-tools/makefiles/common.mk
+#-include ../../fujinet-build-tools/makefiles/common.mk
+#-include ../fujinet-build-tools/makefiles/common.mk
+
+#-include ../../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
+#-include ../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
+#-include ../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
 
 
 # allow for application specific config
@@ -210,6 +207,7 @@ clean:
     done
 
 release: all | $(BUILD_DIR) $(DIST_DIR)
+#	$(info -in release, about to cp file to dist:)
 	cp $(BUILD_DIR)/$(PROGRAM_TGT) $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX)
 
 disk: release $(DISK_TASKS)

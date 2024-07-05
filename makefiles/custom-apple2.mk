@@ -1,7 +1,6 @@
 # custom-apple2.mk
 #
-
-$(info >>>>Including custom-apple2.mk)
+$(info >>>>Starting custom-apple2.mk)
 # acd use $(PROGRAM_TGT) not just $(PROGRAM) when making the .po
 
 
@@ -13,7 +12,6 @@ $(info >>>>Including custom-apple2.mk)
 #LDFLAGS += -C cfg/atari.cfg
 
 
-
 #################################################################
 # DISK creation
 
@@ -21,31 +19,21 @@ SUFFIX =
 DISK_TASKS += .po
 AUTOBOOT := -l
 #APPLE_TOOLS_DIR := ../apple-tools
-#APPLE_TOOLS_DIR := ../../fujinet-build-tools/apple-tools
-
-# find-tools.mk will find the path and save it to the below file
-# Temporary file that stores the path to fujinet-build-tools
-TMP_FILE := found_fn-build-tools.tmp
-
-# Function to read the path from the temporary file if it exists
-ifneq ($(wildcard $(TMP_FILE)),)
-    FUJINET_BUILD_TOOLS_DIR := $(shell cat $(TMP_FILE))
-    $(info Found cached fujinet-build-tools directory: $(FUJINET_BUILD_TOOLS_DIR))
-    APPLE_TOOLS_DIR := $(FUJINET_BUILD_TOOLS_DIR)/apple-tools
-    $(info Set APPLE_TOOLS_DIR to: $(APPLE_TOOLS_DIR))
-else
-    $(error Temporary file $(TMP_FILE) not found. Please run the find-tools.mk Makefile first.)
-endif
+APPLE_TOOLS_DIR := $(FUJINET-BUILD-TOOLS_DIR)/apple-tools
 
 
 .po:
-	@echo "Using APPLE_TOOLS_DIR: $(APPLE_TOOLS_DIR)"
 	$(call RMFILES,$(DIST_DIR)/$(PROGRAM_TGT).po)
-	cp $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(DIST_DIR)/$(PROGRAM)$(SUFFIX)
+	$(call RMFILES,$(DIST_DIR)/$(PROGRAM))
+
+# $(PROGRAM) is the current target build - we'll use that name to add with add-file.sh
+# if the program name is too large it won't autostart!
+
+#   We don't need this - we just need to use the name $(PROGRAM) as the 3rd parameter of add-file.sh
+#	cp $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(DIST_DIR)/$(PROGRAM)
+
 	$(APPLE_TOOLS_DIR)/mk-bitsy.sh $(DIST_DIR)/$(PROGRAM_TGT).po $(PROGRAM_TGT)$(SUFFIX)
-	$(APPLE_TOOLS_DIR)/add-file.sh $(AUTOBOOT) $(DIST_DIR)/$(PROGRAM_TGT).po $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(PROGRAM_TGT)
-#	$(APPLE_TOOLS_DIR)/mk-bitsy.sh $(DIST_DIR)/$(PROGRAM_TGT).po $(PROGRAM_TGT)$(SUFFIX)
-#	$(APPLE_TOOLS_DIR)/add-file.sh $(AUTOBOOT) $(DIST_DIR)/$(PROGRAM_TGT).po $(BUILD_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(PROGRAM_TGT)
+	$(APPLE_TOOLS_DIR)/add-file.sh $(AUTOBOOT) $(DIST_DIR)/$(PROGRAM_TGT).po $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(PROGRAM)
 
 
 # Applewin debug script

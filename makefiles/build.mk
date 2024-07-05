@@ -41,7 +41,7 @@ ALL_TASKS =
 DISK_TASKS =
 
 
--include $(FUJINET-BUILD-TOOLS_DIR)/makefiles/os.mk
+-include $(FUJINET_BUILD_TOOLS_DIR)/makefiles/os.mk
 
 
 CC := cl65
@@ -97,18 +97,8 @@ CFLAGS += --include-dir $(SRCDIR)
 # load the sub-makefiles
 #
 
--include $(FUJINET-BUILD-TOOLS_DIR)/makefiles/common.mk
-
--include $(FUJINET-BUILD-TOOLS_DIR)/makefiles/custom-$(CURRENT_PLATFORM).mk
-
-#-include ../../../fujinet-build-tools/makefiles/common.mk
-#-include ../../fujinet-build-tools/makefiles/common.mk
-#-include ../fujinet-build-tools/makefiles/common.mk
-
-#-include ../../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
-#-include ../../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
-#-include ../fujinet-build-tools/makefiles/custom-$(CURRENT_PLATFORM).mk
-
+-include $(FUJINET_BUILD_TOOLS_DIR)/makefiles/common.mk
+-include $(FUJINET_BUILD_TOOLS_DIR)/makefiles/custom-$(CURRENT_PLATFORM).mk
 
 # allow for application specific config
 -include ./application.mk

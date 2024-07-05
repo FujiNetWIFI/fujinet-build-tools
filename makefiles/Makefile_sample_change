@@ -20,16 +20,16 @@ PROGRAM := weather
 # Remember, this Makefile should be in some other fujinet project and used to built that code
 #
 # EDIT THIS 
-export FUJINET-BUILD-TOOLS_DIR := ../../fujinet-build-tools
+export FUJINET_BUILD_TOOLS_DIR := ../../fujinet-build-tools
 #
 #
 
-# Ensure if FUJINET-BUILD-TOOLS_DIR is set to a real directory
-ifeq ($(wildcard $(FUJINET-BUILD-TOOLS_DIR)),)
-$(error You must have FUJINET-BUILD-TOOLS_DIR set to the location of fujinet-build-tools repo)
+# Ensure if FUJINET_BUILD_TOOLS_DIR is set to a real directory
+ifeq ($(wildcard $(FUJINET_BUILD_TOOLS_DIR)),)
+$(error You must have FUJINET_BUILD_TOOLS_DIR set to the location of fujinet-build-tools repo)
 endif
 
-$(info >>>> Using FUJINET-BUILD-TOOLS_DIR=$(FUJINET-BUILD-TOOLS_DIR))
+$(info >>>> Using FUJINET_BUILD_TOOLS_DIR=$(FUJINET_BUILD_TOOLS_DIR))
 
 
 SUB_TASKS := clean disk test release
@@ -40,7 +40,7 @@ all:
 		echo "-------------------------------------"; \
 		echo "Building $$target"; \
 		echo "-------------------------------------"; \
-		$(MAKE) --no-print-directory -f $(FUJINET-BUILD-TOOLS_DIR)/makefiles/build.mk CURRENT_TARGET=$$target PROGRAM=$(PROGRAM) $(MAKECMDGOALS); \
+		$(MAKE) --no-print-directory -f $(FUJINET_BUILD_TOOLS_DIR)/makefiles/build.mk CURRENT_TARGET=$$target PROGRAM=$(PROGRAM) $(MAKECMDGOALS); \
 	done
 
 # if disk images were built show them

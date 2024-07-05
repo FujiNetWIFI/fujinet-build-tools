@@ -1,7 +1,8 @@
-$(info >>>>Including fujinet-lib.mk)
+$(info >>>>Starting fujinet-lib.mk)
 
+$(info >>>> Using FUJINET_LIB_VERSION=$(FUJINET_LIB_VERSION))
+# set FN_LIN_VERSION in your local Makefile
 
-FUJINET_LIB_VERSION := 4.2.0
 
 FUJINET_LIB = ../_libs
 FUJINET_LIB_VERSION_DIR = $(FUJINET_LIB)/$(FUJINET_LIB_VERSION)-$(CURRENT_TARGET)

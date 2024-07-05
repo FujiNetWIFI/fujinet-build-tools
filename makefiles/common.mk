@@ -2,7 +2,7 @@
 # 
 
 $(info >>>>Starting common.mk)
--include $(FUJINET-BUILD-TOOLS_DIR)/makefiles/fujinet-lib.mk
+-include $(FUJINET_BUILD_TOOLS_DIR)/makefiles/fujinet-lib.mk
 
 VERSION_FILE := src/version.txt
 ifeq (,$(wildcard $(VERSION_FILE)))

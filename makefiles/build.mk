@@ -63,12 +63,17 @@ SOURCES += $(wildcard $(SRCDIR)/*.s)
 SOURCES += $(call rwildcard,$(SRCDIR)/common/,*.s)
 SOURCES += $(call rwildcard,$(SRCDIR)/common/,*.c)
 
-# allow src/<target>/ and its recursive subdirs
-SOURCES_TG := $(call rwildcard,$(SRCDIR)/$(CURRENT_TARGET)/,*.s)
-SOURCES_TG += $(call rwildcard,$(SRCDIR)/$(CURRENT_TARGET)/,*.c)
+# allow src/<platform>/ and its recursive subdirs
+SOURCES_PF := $(call rwildcard,$(SRCDIR)/$(CURRENT_PLATFORM)/,*.s)
+SOURCES_PF += $(call rwildcard,$(SRCDIR)/$(CURRENT_PLATFORM)/,*.c)
+
+# allow src/current-target/<target>/ and its recursive subdirs
+SOURCES_TG := $(call rwildcard,$(SRCDIR)/current-target/$(CURRENT_TARGET)/,*.s)
+SOURCES_TG += $(call rwildcard,$(SRCDIR)/current-target/$(CURRENT_TARGET)/,*.c)
 
 # remove trailing and leading spaces.
 SOURCES := $(strip $(SOURCES))
+SOURCES_PF := $(strip $(SOURCES_PF))
 SOURCES_TG := $(strip $(SOURCES_TG))
 
 # convert from src/your/long/path/foo.[c|s] to obj/<target>/your/long/path/foo.o
@@ -77,17 +82,22 @@ OBJ1 := $(SOURCES:.c=.o)
 OBJECTS := $(OBJ1:.s=.o)
 OBJECTS := $(OBJECTS:$(SRCDIR)/%=$(OBJDIR)/$(CURRENT_TARGET)/%)
 
-OBJ2 := $(SOURCES_TG:.c=.o)
-OBJECTS_TG := $(OBJ2:.s=.o)
+OBJ2 := $(SOURCES_PF:.c=.o)
+OBJECTS_PF := $(OBJ2:.s=.o)
+OBJECTS_PF := $(OBJECTS_PF:$(SRCDIR)/%=$(OBJDIR)/$(CURRENT_TARGET)/%)
+
+OBJ3 := $(SOURCES_TG:.c=.o)
+OBJECTS_TG := $(OBJ3:.s=.o)
 OBJECTS_TG := $(OBJECTS_TG:$(SRCDIR)/%=$(OBJDIR)/$(CURRENT_TARGET)/%)
 
+OBJECTS += $(OBJECTS_PF)
 OBJECTS += $(OBJECTS_TG)
 
 # Ensure make recompiles parts it needs to if src files change
 DEPENDS := $(OBJECTS:.o=.d)
 
-ASFLAGS += --asm-include-dir src/common --asm-include-dir src/$(CURRENT_TARGET)
-CFLAGS += --include-dir src/common --include-dir src/$(CURRENT_TARGET)
+ASFLAGS += --asm-include-dir src/common --asm-include-dir src/$(CURRENT_PLATFORM) --asm-include-dir src/current-target/$(CURRENT_TARGET)
+CFLAGS += --include-dir src/common --include-dir src/$(CURRENT_PLATFORM) --include-dir src/current-target/$(CURRENT_TARGET)
 
 ASFLAGS += --asm-include-dir $(SRCDIR)
 CFLAGS += --include-dir $(SRCDIR)

@@ -9,12 +9,12 @@
 #
 # delete all comments above this when you use this as your Makefile
 
-TARGETS = apple2enh apple2
-PROGRAM := weather
+TARGETS = atari apple2enh apple2 c64
+PROGRAM := __APP_NAME__
 
 # Edit below
 export FUJINET_BUILD_TOOLS_DIR := ../../fujinet-build-tools
-export FUJINET_LIB_VERSION := 4.3.1
+export FUJINET_LIB_VERSION := 4.4.0
 
 ifeq ($(wildcard $(FUJINET_BUILD_TOOLS_DIR)),)
 $(error You must have FUJINET_BUILD_TOOLS_DIR set to the location of fujinet-build-tools repo)
@@ -30,7 +30,6 @@ all:
 		echo "-------------------------------------"; \
 		$(MAKE) --no-print-directory -f $(FUJINET_BUILD_TOOLS_DIR)/makefiles/build.mk CURRENT_TARGET=$$target PROGRAM=$(PROGRAM) $(MAKECMDGOALS); \
 	done
-
 # if disk images were built show them
 	@if [ -d ./dist ]; then \
 		echo "Contents of dist:"; \

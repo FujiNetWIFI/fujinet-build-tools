@@ -8,12 +8,18 @@ DISK_TASKS += .create-d64
 
 DISK_FILE = $(DIST_DIR)/$(PROGRAM).d64
 
-# already relies on release
 .create-d64:
-	@echo "creating $(DISK_FILE)"
-	c1541 -format "$(PROGRAM),01" d64 $(DISK_FILE)
-	@echo "copying $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) as $(PROGRAM)$(SUFFIX)"
-	c1541 -attach $(DISK_FILE) -write $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(PROGRAM)$(SUFFIX)
+	@which cc1541 > /dev/null 2>&1 ; \
+	if [ $$? -eq 0 ] ; then \
+		echo "creating $(DISK_FILE) from program $(PROGRAM_TGT)" ; \
+		if [ -f "$(DISK_FILE)" ] ; then \
+			rm "$(DISK_FILE)" ; \
+		fi ; \
+		cc1541 -q -n "fn-lib: $(PROGRAM)" -f "$(PROGRAM)" -P -w $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) -H "created by fenrock" $(DISK_FILE) ; \
+	else \
+		echo -e "\nERROR! You must install cc1541 from https://bitbucket.org/ptv_claus/cc1541/src/master/ to create commodore disks\n" ; \
+		exit 1 ; \
+	fi
 
 ################################################################
 # TESTING / EMULATOR

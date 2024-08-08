@@ -4,8 +4,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+#include "hello.h"
 #include "util.h"
-
-void hello(char *name);
 
 #endif // MAIN_H

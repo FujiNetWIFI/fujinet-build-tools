@@ -14,7 +14,7 @@ PROGRAM := __APP_NAME__
 
 # Edit below
 export FUJINET_BUILD_TOOLS_DIR := ../../fujinet-build-tools
-export FUJINET_LIB_VERSION := 4.4.0
+export FUJINET_LIB_VERSION := 4.5.0
 
 ifeq ($(wildcard $(FUJINET_BUILD_TOOLS_DIR)),)
 $(error You must have FUJINET_BUILD_TOOLS_DIR set to the location of fujinet-build-tools repo)

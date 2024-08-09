@@ -4,7 +4,7 @@ A repo of help scripts, makefile scripts, and template application for building 
 
 ## Creating a new app
 
-To create a new app based on the template with a hello world style base, run following
+To create a new app based on the template with a hello world style base, run the following command in a shell
 
 ```shell
 ./create-app.sh YOUR_APP_NAME path/to/root-dir

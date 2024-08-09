@@ -22,7 +22,7 @@ FUJINET_LIB_DOWNLOAD_FILE = $(FUJINET_LIB)/fujinet-lib-$(CURRENT_TARGET)-$(FUJIN
 			echo "ERROR: Unable to find file $(FUJINET_LIB_DOWNLOAD_URL)"; \
 			exit 1; \
 		fi; \
-		echo "Downloading fujinet-lib for $(TARGETLIST) version $(FUJINET_LIB_VERSION) from $(FUJINET_LIB_DOWNLOAD_URL)"; \
+		echo "Downloading fujinet-lib for $(CURRENT_TARGET) version $(FUJINET_LIB_VERSION) from $(FUJINET_LIB_DOWNLOAD_URL)"; \
 		mkdir -p $(FUJINET_LIB); \
 		curl -sL $(FUJINET_LIB_DOWNLOAD_URL) -o $(FUJINET_LIB_DOWNLOAD_FILE); \
 		echo "Unzipping to $(FUJINET_LIB)"; \

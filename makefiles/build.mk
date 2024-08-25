@@ -32,7 +32,9 @@
 #     VERSION_STRING := $(file < $(VERSION_FILE))
 #     CFLAGS += -DVERSION_STRING=\"$(VERSION_STRING)\"
 
-$(info >>>Starting build.mk)
+ifeq ($(DEBUG),true)
+    $(info >Starting build.mk)
+endif
 
 
 # Ensure WSL2 Ubuntu and other linuxes use bash by default instead of /bin/sh, which does not always like the shell commands.
@@ -40,8 +42,8 @@ SHELL := /usr/bin/env bash
 ALL_TASKS =
 DISK_TASKS =
 
-
--include $(FUJINET_BUILD_TOOLS_DIR)/makefiles/os.mk
+# try and load some target mappings for all platforms
+-include ../makefiles/os.mk
 
 
 CC := cl65
@@ -107,14 +109,27 @@ CFLAGS += --include-dir $(SRCDIR)
 # load the sub-makefiles
 #
 
--include $(FUJINET_BUILD_TOOLS_DIR)/makefiles/common.mk
--include $(FUJINET_BUILD_TOOLS_DIR)/makefiles/custom-$(CURRENT_PLATFORM).mk
+ifeq ($(DEBUG),true)
+    $(info >>load common.mk)
+endif
+
+-include ./makefiles/common.mk
+
+
+ifeq ($(DEBUG),true)
+    $(info >>load custom-$(CURRENT_PLATFORM).mk)
+endif
+
+-include ./makefiles/custom-$(CURRENT_PLATFORM).mk
+
+
+ifeq ($(DEBUG),true)
+    $(info >>load application.mk)
+endif
 
 # allow for application specific config
 -include ./application.mk
 
-# allow for local env specific deployment options
--include ./deployment.mk
 
 
 define _listing_
@@ -190,6 +205,15 @@ $(BUILD_DIR)/$(PROGRAM_TGT): $(OBJECTS) $(LIBS) | $(BUILD_DIR)
 	$(CC) -t $(CURRENT_TARGET) $(LDFLAGS) -o $@ $^
 
 $(PROGRAM_TGT): $(BUILD_DIR)/$(PROGRAM_TGT) | $(BUILD_DIR)
+
+
+ifeq ($(DEBUG),true)
+    $(info PROGRAM_TGT is set to: $(PROGRAM_TGT) )
+    $(info BUILD_DIR is set to: $(BUILD_DIR) )
+    $(info CURRENT_TARGET is set to: $(CURRENT_TARGET) )
+    $(info ........................... )
+endif
+
 
 test: $(PROGRAM_TGT)
 	$(PREEMUCMD)

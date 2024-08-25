@@ -1,7 +1,10 @@
-# custom-apple2.mk
-#
-$(info >>>>Starting custom-apple2.mk)
-# acd use $(PROGRAM_TGT) not just $(PROGRAM) when making the .po
+###################################################################
+# Apple
+###################################################################
+ifeq ($(DEBUG),true)
+    $(info >>>Starting custom-apple2.mk)
+endif
+
 
 # COMPILE FLAGS
 # reserved memory for graphics

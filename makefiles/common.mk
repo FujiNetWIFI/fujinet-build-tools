@@ -1,7 +1,10 @@
-# common.mk
-# 
+###################################################################
+# Common across Platforms
+###################################################################
+ifeq ($(DEBUG),true)
+    $(info >>>Starting common.mk)
+endif
 
-$(info >>>>Starting common.mk)
 -include $(FUJINET_BUILD_TOOLS_DIR)/makefiles/fujinet-lib.mk
 
 VERSION_FILE := src/version.txt

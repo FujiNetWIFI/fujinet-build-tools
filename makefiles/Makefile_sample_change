@@ -1,24 +1,36 @@
-# Sample Makefile
+# Sample Makefile For FujiNet Applications
+# 2024
 #
-# Copy this Makefile to your local project and edit as needed. It works with cc65 and this repo to create clean
-# easy builds that will pull down fujinet-lib for you automatically...
+# Copy the entire makefiles folder and all included files into your local project.
+
+# Copy _this_ Makefile into the root of you local project and edit as needed. 
+#  It works with cc65 and other compilers and has automation to find 
+#  the specified fujinet-lib and extract it for you automatically in this project.
 #
-# Set the TARGETS and PROGRAM values as required.
-# Set the FujinetLib version you want to include.
+# Set the TARGETS and PROGRAM values as required below.
+# Set the FUJINET_BUILD_TOOLS_DIR to where your apple2 disk tools are.
+# Disk tools for Coco, Atari, Adam and C64 should already be built and in your path.
+# Set the FUJINET_LIB_VERSION version you want to include.
 # See makefiles/build.mk for details on directory structure for src files and how to add custom extensions to the build.
 #
 # delete all comments above this when you use this as your Makefile
 
+
+
 TARGETS = atari apple2enh apple2 c64
 PROGRAM := __APP_NAME__
 
-# Edit below
-export FUJINET_BUILD_TOOLS_DIR := ../../fujinet-build-tools
-export FUJINET_LIB_VERSION := 4.5.2
+# Set DEBUG to true or false to see more or less output about what is going on.
+DEBUG := true
+export DEBUG
 
-ifeq ($(wildcard $(FUJINET_BUILD_TOOLS_DIR)),)
-$(error You must have FUJINET_BUILD_TOOLS_DIR set to the location of fujinet-build-tools repo)
-endif
+# Edit below to point to a folder that has the apple-tools AppleComander and bitsy.bye script
+# which can be this repo itself if you have it on your system, otherwise point to the apple-tools
+# folder you have on your system.
+export FUJINET_BUILD_TOOLS_DIR := ../fujinet-build-tools
+
+# Set this to the version of FN-LIB you wish to use in this project:
+export FUJINET_LIB_VERSION := 4.5.2
 
 SUB_TASKS := clean disk test release
 .PHONY: all help $(SUB_TASKS)
@@ -28,8 +40,9 @@ all:
 		echo "-------------------------------------"; \
 		echo "Building $$target"; \
 		echo "-------------------------------------"; \
-		$(MAKE) --no-print-directory -f $(FUJINET_BUILD_TOOLS_DIR)/makefiles/build.mk CURRENT_TARGET=$$target PROGRAM=$(PROGRAM) $(MAKECMDGOALS); \
+		$(MAKE) --no-print-directory -f ./makefiles/build.mk CURRENT_TARGET=$$target PROGRAM=$(PROGRAM) $(MAKECMDGOALS); \
 	done
+	
 # if disk images were built show them
 	@if [ -d ./dist ]; then \
 		echo "Contents of dist:"; \

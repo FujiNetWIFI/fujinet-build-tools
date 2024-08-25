@@ -1,4 +1,5 @@
 #!/bin/bash
+#set -x
 #
 # Creates an initial simple hello world application from template, with all required build files etc.
 # Once created, you should be able to type "make" to fully compile for all targets the application.
@@ -17,15 +18,28 @@ ROOT_DIR_PATH="$2"
 
 if [ ! -d "${ROOT_DIR_PATH}" ] ; then
   echo "Could not find root directory to create app in. Please create it first to confirm it is correct"
-  exit 1
+  read -p "Do you want to create the directory now? (y/n): " choice
+  if [[ ! "$choice" =~ ^(y|Y)$ ]] ; then
+    echo "Exiting..."
+    exit 1
+  else
+    mkdir -p "${ROOT_DIR_PATH}"
+  fi
 fi
 
 TARGET_APP_DIR="${ROOT_DIR_PATH}/${APP_NAME}"
 
-if [ -d "${TARGET_APP_DIR}" ] ; then
+while [ -d "${TARGET_APP_DIR}" ] ; do 
   echo "Target directory ${TARGET_APP_DIR} already exists. Please move/delete it, or choose new name."
-  exit 1
-fi
+  read -p "New APP_NAME (leave blank to quit): " NEW_APP_NAME
+
+  if [[ -z "${NEW_APP_NAME}" ]]; then
+    exit 1
+  fi
+
+  APP_NAME="${NEW_APP_NAME}"
+  TARGET_APP_DIR="${ROOT_DIR_PATH}/${APP_NAME}"
+done 
 
 echo "Creating ${TARGET_APP_DIR}"
 

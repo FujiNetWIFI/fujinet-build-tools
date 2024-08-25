@@ -1,7 +1,7 @@
 $(info >>>>Starting fujinet-lib.mk)
 
 $(info >>>> Using FUJINET_LIB_VERSION=$(FUJINET_LIB_VERSION))
-# set FN_LIN_VERSION in your local Makefile
+# set FN_LIB_VERSION in your local Makefile
 
 
 FUJINET_LIB = ../_libs

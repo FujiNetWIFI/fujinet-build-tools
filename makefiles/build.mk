@@ -43,7 +43,7 @@ ALL_TASKS =
 DISK_TASKS =
 
 # try and load some target mappings for all platforms
--include ../makefiles/os.mk
+-include ./makefiles/os.mk
 
 
 CC := cl65

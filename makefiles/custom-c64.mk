@@ -12,6 +12,7 @@ endif
 
 SUFFIX = .prg
 DISK_TASKS += .create-d64
+VICE_HOME := $(dir $(shell which xvic))
 
 DISK_FILE = $(DIST_DIR)/$(PROGRAM).d64
 

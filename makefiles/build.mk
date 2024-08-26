@@ -217,7 +217,7 @@ endif
 
 test: $(PROGRAM_TGT)
 	$(PREEMUCMD)
-	$(EMUCMD) $(BUILD_DIR)\\$<
+	$(EMUCMD) $(BUILD_DIR)/$<
 	$(POSTEMUCMD)
 
 # Use "./" in front of all dirs being removed as a simple safety guard to

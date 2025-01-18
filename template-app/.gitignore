@@ -4,6 +4,7 @@
 build/
 dist/
 obj/
+_cache/
 
 # emulator configs
 altirra-debug.ini
@@ -14,6 +15,3 @@ AppleWin.log
 
 *.jar
 *.dsk
-
-assets/*
-!assets/README.md

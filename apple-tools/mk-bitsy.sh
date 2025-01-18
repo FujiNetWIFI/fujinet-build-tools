@@ -14,7 +14,6 @@ fi
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 source "$SCRIPT_DIR/get-binaries.sh"
 
-
 DISKNAME="$1"
 # Convert underscores and hyphens to fullstops in the name, as they aren't allowed. Maybe others!
 VOLUMENAME="$(echo "$2" | tr '_-' '.')"
@@ -22,17 +21,19 @@ if [ -f "$DISKNAME" ] ; then
   rm "$DISKNAME"
 fi
 
-SRC_PRODOS="$SCRIPT_DIR/ProDOS_2_4_2.dsk"
+# CACHE_DIR is set in get-binaries.sh
+SRC_PRODOS="$CACHE_DIR/ProDOS_2_4_2.dsk"
 
 export ACX_DISK_NAME="$DISKNAME"
 
-#echo '....................................'
-#echo "SCRIPT_DIR=$SCRIPT_DIR"
-#echo "ACX_DISK_NAME=$ACX_DISK_NAME"
-#echo "ACX=${ACX}"
-#echo "VOLUMENAME=${VOLUMENAME}"
-#echo "DISKNAME=${DISKNAME}"
-#echo '....................................'
+echo '....................................'
+echo "SCRIPT_DIR=$SCRIPT_DIR"
+echo "ACX_DISK_NAME=$ACX_DISK_NAME"
+echo "ACX=${ACX}"
+echo "VOLUMENAME=${VOLUMENAME}"
+echo "DISKNAME=${DISKNAME}"
+echo "SRC_PRODOS=${SRC_PRODOS}"
+echo '....................................'
 
 
 ${ACX} create --prodos -f "$SRC_PRODOS"

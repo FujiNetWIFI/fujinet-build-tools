@@ -1,6 +1,9 @@
 # Sample Makefile For FujiNet Applications
-# 2024
+# 2024-2025
 #
+# You can use the create-app.sh script to create a new app from this template, or manually copy the files as detailed below.
+#
+# MANUAL INSTRUCTIONS
 # Copy the entire makefiles folder and all included files into your local project.
 
 # Copy _this_ Makefile into the root of you local project and edit as needed. 
@@ -30,7 +33,7 @@ export DEBUG
 export FUJINET_BUILD_TOOLS_DIR := ../fujinet-build-tools
 
 # Set this to the version of FN-LIB you wish to use in this project:
-export FUJINET_LIB_VERSION := 4.5.2
+export FUJINET_LIB_VERSION := 4.7.4
 
 SUB_TASKS := clean disk test release
 .PHONY: all help $(SUB_TASKS)

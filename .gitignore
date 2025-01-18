@@ -4,6 +4,7 @@
 build/
 dist/
 obj/
+_fnlib_cache/
 
 # emulator configs
 altirra-debug.ini

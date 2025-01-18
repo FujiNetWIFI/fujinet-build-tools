@@ -52,6 +52,7 @@ SRCDIR := src
 BUILD_DIR := build
 OBJDIR := obj
 DIST_DIR := dist
+FN_LIB_CACHE_DIR := ./_fnlib_cache
 
 # This allows src to be nested withing sub-directories.
 rwildcard=$(wildcard $(1)$(2))$(foreach d,$(wildcard $1*), $(call rwildcard,$d/,$2))

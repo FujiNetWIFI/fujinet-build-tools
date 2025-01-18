@@ -18,18 +18,22 @@ SUFFIX = .com
 DISK_TASKS += .atr
 PICOBOOT_DOWNLOAD_URL = https://github.com/FujiNetWIFI/assets/releases/download/picobin/picoboot.bin
 
+# atari cache dir
+ATARI_CACHE_DIR := $(CACHE_DIR)/atari
+
 .atr:
 	$(call MKDIR,$(DIST_DIR)/atr)
 	$(call MKDIR,$(CACHE_DIR))
+	$(call MKDIR,$(ATARI_CACHE_DIR))
 	cp $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(DIST_DIR)/atr/$(PROGRAM)$(SUFFIX)
 	@if [ -f $(DIST_DIR)/$(PROGRAM).atr ] ; then \
 	  rm $(DIST_DIR)/$(PROGRAM).atr ; \
 	fi ;
-	@if [ ! -f $(CACHE_DIR)/picoboot.bin ] ; then \
+	@if [ ! -f $(ATARI_CACHE_DIR)/picoboot.bin ] ; then \
 		echo "Downloading picoboot.bin"; \
-		curl -sL $(PICOBOOT_DOWNLOAD_URL) -o $(CACHE_DIR)/picoboot.bin; \
+		curl -sL $(PICOBOOT_DOWNLOAD_URL) -o $(ATARI_CACHE_DIR)/picoboot.bin; \
 	fi
-	dir2atr -m -S -B $(CACHE_DIR)/picoboot.bin $(DIST_DIR)/$(PROGRAM).atr $(DIST_DIR)/atr
+	dir2atr -m -S -B $(ATARI_CACHE_DIR)/picoboot.bin $(DIST_DIR)/$(PROGRAM).atr $(DIST_DIR)/atr
 	rm -rf $(DIST_DIR)/atr
 
 ################################################################

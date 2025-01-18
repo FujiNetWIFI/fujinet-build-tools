@@ -6,11 +6,10 @@ ifeq ($(DEBUG),true)
 endif
 
 
-# COMPILE FLAGS
-# reserved memory for graphics
-# LDFLAGS += -Wl -D,__RESERVED_MEMORY__=0x2000
+#################################################################
+# COMPILE FLAGS for just apple2 can be added here
 #LDFLAGS += --start-addr 0x4400
-#LDFLAGS += -C cfg/atari.cfg
+
 
 #################################################################
 # DISK creation
@@ -18,7 +17,6 @@ endif
 SUFFIX =
 DISK_TASKS += .po
 AUTOBOOT := -l
-#APPLE_TOOLS_DIR := ../apple-tools
 APPLE_TOOLS_DIR := ./apple-tools
 
 .po:
@@ -35,14 +33,14 @@ APPLE_TOOLS_DIR := ./apple-tools
 
 # Applewin debug script
 .gendebug: $(PROGRAM_TGT)
-	@if [ -f "build/$(PROGRAM_TGT).lbl" ]; then \
+	@if [ -f "$(BUILD_DIR)/$(PROGRAM_TGT).lbl" ]; then \
 		echo "Generating debug.scr script for AppleWin"; \
-		echo 'echo "Loading symbols"' > build/debug.scr; \
-		awk '{printf("sym %s = %s\n", substr($$3, 2), $$2)}' < build/$(PROGRAM_TGT).lbl >> build/debug.scr; \
-		echo 'bpx _main' >> build/debug.scr; \
-		echo 'bpx _debug' >> build/debug.scr; \
-		echo 'bpx _network_open' >> build/debug.scr; \
-		echo 'bpx _sp_init' >> build/debug.scr; \
+		echo 'echo "Loading symbols"' > $(BUILD_DIR)/debug.scr; \
+		awk '{printf("sym %s = %s\n", substr($$3, 2), $$2)}' < $(BUILD_DIR)/$(PROGRAM_TGT).lbl >> $(BUILD_DIR)/debug.scr; \
+		echo 'bpx _main' >> $(BUILD_DIR)/debug.scr; \
+		echo 'bpx _debug' >> $(BUILD_DIR)/debug.scr; \
+		echo 'bpx _network_open' >> $(BUILD_DIR)/debug.scr; \
+		echo 'bpx _sp_init' >> $(BUILD_DIR)/debug.scr; \
 	fi
 
 ALL_TASKS += .gendebug

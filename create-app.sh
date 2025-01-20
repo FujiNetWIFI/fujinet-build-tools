@@ -9,7 +9,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 if [ $# -ne 2 ] ; then
   echo "Usage: $(basename $0) APP_NAME PATH/TO/ROOT"
   echo "  APP_NAME     : name of directory created, and the app name for project"
-  echo "  PATH/TO/ROOT : path the the folder that APP_NAME directory will be created in"
+  echo "  PATH/TO/ROOT : path to the folder that APP_NAME directory will be created in"
   exit 1
 fi
 
@@ -51,7 +51,10 @@ cp -r apple-tools "${TARGET_APP_DIR}/"
 
 # create project Makefile
 mv "${TARGET_APP_DIR}/makefiles/Makefile_sample_change" "${TARGET_APP_DIR}/Makefile"
-sed -i.bu "s#../../fujinet-build-tools#.#g;s#__APP_NAME__#${APP_NAME}#g" "${TARGET_APP_DIR}/Makefile"
+sed -i.bu "s#__APP_NAME__#${APP_NAME}#g;s#__PARENT_RELATIVE_DIR__#.#g" "${TARGET_APP_DIR}/Makefile"
+sed -i.bu "s#__PARENT_RELATIVE_DIR__#.#g" "${TARGET_APP_DIR}/makefiles/build.mk"
+sed -i.bu "s#__PARENT_RELATIVE_DIR__#.#g" "${TARGET_APP_DIR}/makefiles/common.mk"
+sed -i.bu "s#__PARENT_RELATIVE_DIR__#.#g" "${TARGET_APP_DIR}/makefiles/custom-apple2.mk"
 
 # remove any backup files created by sed because macos
 find "${TARGET_APP_DIR}" -name \*.bu -exec rm {} \;

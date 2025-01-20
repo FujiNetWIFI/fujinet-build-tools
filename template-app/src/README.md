@@ -21,6 +21,7 @@ src
 ├── *.c|h|s             #  ... and any other C, H or S file you wish to include
 │
 ├── common/             # common to all targets, including its sub-dirs
+│   ├── mycommon.c
 │   ├── utils/
 │   └──── fn1.c         # doesn't have to be in just common, can be a subdir
 │

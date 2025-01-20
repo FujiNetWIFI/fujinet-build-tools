@@ -17,7 +17,7 @@ endif
 SUFFIX =
 DISK_TASKS += .po
 AUTOBOOT := -l
-APPLE_TOOLS_DIR := ./apple-tools
+APPLE_TOOLS_DIR := __PARENT_RELATIVE_DIR__/apple-tools
 
 .po:
 	$(call RMFILES,$(DIST_DIR)/$(PROGRAM_TGT).po)

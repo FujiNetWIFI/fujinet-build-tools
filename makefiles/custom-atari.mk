@@ -5,6 +5,8 @@ ifeq ($(DEBUG),true)
     $(info >>>Starting custom-atari.mk)
 endif
 
+################################################################
+# COMPILE FLAGS
 # reserved memory for graphics
 # LDFLAGS += -Wl -D,__RESERVED_MEMORY__=0x2000
 

@@ -24,13 +24,18 @@ PICOBOOT_DOWNLOAD_URL = https://github.com/FujiNetWIFI/assets/releases/download/
 ATARI_CACHE_DIR := $(CACHE_DIR)/atari
 
 .atr:
+	@which dir2atr > /dev/null 2>&1 ; \
+	if [ $$? -ne 0 ] ; then \
+		echo -e "\nERROR! You must compile and install dir2atr from https://github.com/HiassofT/AtariSIO to create atari disks\n" ; \
+		exit 1 ; \
+	fi
 	$(call MKDIR,$(DIST_DIR)/atr)
 	$(call MKDIR,$(CACHE_DIR))
 	$(call MKDIR,$(ATARI_CACHE_DIR))
 	cp $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX) $(DIST_DIR)/atr/$(PROGRAM)$(SUFFIX)
 	@if [ -f $(DIST_DIR)/$(PROGRAM).atr ] ; then \
-	  rm $(DIST_DIR)/$(PROGRAM).atr ; \
-	fi ;
+		rm $(DIST_DIR)/$(PROGRAM).atr ; \
+	fi
 	@if [ ! -f $(ATARI_CACHE_DIR)/picoboot.bin ] ; then \
 		echo "Downloading picoboot.bin"; \
 		curl -sL $(PICOBOOT_DOWNLOAD_URL) -o $(ATARI_CACHE_DIR)/picoboot.bin; \

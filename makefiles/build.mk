@@ -22,6 +22,10 @@ OBJDIR := obj
 DIST_DIR := dist
 CACHE_DIR := __PARENT_RELATIVE_DIR__/_cache
 
+# This causes the output file to have the TARGET in the name, e.g. foo.atari.com
+# Set to 0 for "foo.com" instead, but note this will fail for devices that have multiple targets (like apple2 and apple2enh) that would share same name and overwrite each other.
+APPEND_TARGET := 1
+
 # This allows src to be nested withing sub-directories.
 rwildcard=$(wildcard $(1)$(2))$(foreach d,$(wildcard $1*), $(call rwildcard,$d/,$2))
 
@@ -200,7 +204,10 @@ clean:
     done
 
 release: all | $(BUILD_DIR) $(DIST_DIR)
-#	$(info -in release, about to cp file to dist:)
+ifeq ($(APPEND_TARGET),1)
 	cp $(BUILD_DIR)/$(PROGRAM_TGT) $(DIST_DIR)/$(PROGRAM_TGT)$(SUFFIX)
+else
+	cp $(BUILD_DIR)/$(PROGRAM_TGT) $(DIST_DIR)/$(PROGRAM)$(SUFFIX)
+endif
 
 disk: release $(DISK_TASKS)
